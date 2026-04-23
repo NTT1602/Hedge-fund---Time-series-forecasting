@@ -141,7 +141,7 @@ Thiết lập trong `main.ipynb`:
 
 ---
 
-## 7. Suy luận (inference) & tạo submission
+## 7. Suy luận & tạo submission
 Do test không có đủ lịch sử cho mỗi `code`, notebook nối:
 
 1) `last_days`: lấy `max_seq_len-1` dòng cuối theo mỗi `code` từ train.
@@ -159,7 +159,7 @@ Do test không có đủ lịch sử cho mỗi `code`, notebook nối:
 
 ---
 
-## 9. Hướng dẫn chạy lại (reproducibility)
+## 9. Hướng dẫn chạy lại 
 ### 9.1. Môi trường
 Các thư viện xuất hiện trong notebooks:
 
