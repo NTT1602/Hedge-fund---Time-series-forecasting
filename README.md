@@ -6,7 +6,7 @@ Dự án này xây dựng một pipeline dự báo chuỗi thời gian cho bài 
 - Các đặc trưng dạng số (các cột `feature_*`),
 - Các biến phân loại: `code`, `sub_code`, `sub_category`, `horizon`,
 - Chỉ số thời gian `ts_index`,
-- Trọng số `weight'.
+- Trọng số `weight`.
 
 Trong notebook `main.ipynb`, mô hình chính là **Transformer**, kèm theo một mô hình **LightGBM** đơn giản.
 
