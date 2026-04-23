@@ -168,7 +168,7 @@ Các thư viện xuất hiện trong notebooks:
 - `scikit-learn` (`StandardScaler`, `LabelEncoder`)
 - `torch` (PyTorch)
 - `lightgbm`
-- (tuỳ chọn cho EDA) `matplotlib`, `seaborn`
+- `matplotlib`, `seaborn`
 
 ### 9.2. Dữ liệu
 
