@@ -23,6 +23,7 @@ Các notebook sử dụng dữ liệu dạng parquet:
 
 ### 1.2. Mục tiêu dự đoán
 Cho từng dữ liệu theo thời gian, dự đoán:
+
 $$
 \hat{y} = f(\text{features}, \text{categorical context}, \text{history})
 $$
@@ -96,6 +97,7 @@ Mô hình `Transformer` trong `main.ipynb`:
 - Nhánh “wide”: `skip_linear(num_features → 1)` dùng `x_features` ở bước cuối
 
 Kết quả cuối:
+
 $$
 \hat{y} = \hat{y}_{deep} + \hat{y}_{wide}
 $$
@@ -113,20 +115,24 @@ Phần cuối `main.ipynb` huấn luyện LightGBM (GBDT) với:
 Trong `main.ipynb`, `Loss` được định nghĩa:
 
 **(i) Weighted normalized MSE**
+
 $$
 L_{mse} = \frac{\sum_i w_i\,(y_i-\hat{y}_i)^2}{\sum_i w_i\,y_i^2 + \epsilon}
 $$
 
 **(ii) Pearson correlation loss**
 Gọi $\rho$ là hệ số tương quan Pearson giữa $\hat{y}$ và $y$ trong batch:
+
 $$
 L_{pearson} = 1 - \rho
 $$
 
 **(iii) Loss tổng**
+
 $$
 L = \alpha\,L_{mse} + (1-\alpha)\,L_{pearson}
 $$
+
 với `alpha = 0.6` và `eps = 1e-8`.
 
 Ngoài ra có một biến thể `Loss2` dùng trọng số chuẩn hoá $w/\sum w$ và tính Pearson theo trọng số.
