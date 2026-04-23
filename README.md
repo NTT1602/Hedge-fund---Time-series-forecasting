@@ -197,7 +197,14 @@ Trong Hedge fund - Time series forecasting competition trên kaggle
 Mặc dù pipeline trong `main.ipynb` sử dụng kiến trúc **Wide & Deep Transformer** (kết hợp embedding ngữ cảnh + self-attention + nhánh linear “wide”), kết quả thực nghiệm **kém hơn** baseline **LightGBM**. Đây không hẳn là do mô hình “yếu”, mà chủ yếu đến từ bản chất của dữ liệu hedge fund/chứng khoán:
 
 - **Tỷ lệ Tín hiệu/Nhiễu rất thấp (Low Signal-to-Noise Ratio — SNR)**
-	Dữ liệu tài chính chứa nhiều biến động ngẫu nhiên và nhiễu cao tần. Self-Attention rất mạnh trong việc tìm “pattern”, nhưng ở môi trường SNR thấp, mô hình dễ **học vẹt** các vi biến động ngẫu nhiên (overfit) thay vì nắm bắt quy luật có tính khái quát.
+	Dữ liệu tài chính chứa nhiều biến động ngẫu nhiên và nhiễu. Khi SNR thấp, mô hình dễ **học vẹt** các biến động ngẫu nhiên (overfit) thay vì nắm bắt quy luật có tính khái quát.
+
+- **Hạn chế theo `horizon`**:
+	- *Với Transformer/NN:*
+		NN cố gắng **nén** thông tin vào các vector ẩn và dùng **cùng một bộ tham số** (Linear/Attention) để phục vụ mọi `horizon`. Nếu `horizon=1` cần quy luật A còn `horizon=25` cần quy luật B (thậm chí ngược nhau), mô hình dễ học một điểm trung bình giữa A và B — dẫn đến dự đoán kém cho cả hai.
+
+	- *Với LightGBM:*
+		Cây quyết định có xu hướng **tách nhánh theo `horizon`** (và các điều kiện liên quan) rất sớm nếu nó giúp giảm loss và dự đoán hiệu quả hơn. 
 
 - **Thiếu hụt Data Engineering đặc thù cho dữ liệu bảng theo thời gian**
 	Do phần lớn thời gian của dự án dành cho việc cải thiện mô hình transformer, hiện tại đang “đẩy” gánh nặng khai phá quy luật cho AutoEncoder + Attention trên các `feature_*` tương đối thô. 
