@@ -113,9 +113,12 @@ Phần cuối `main.ipynb` huấn luyện LightGBM (GBDT) với:
 Trong `main.ipynb`, `Loss` được định nghĩa:
 
 **(i) Weighted normalized MSE**
-$$
-L_{mse} = \frac{\sum_i w_i\,(y_i-\hat{y}_i)^2}{\sum_i w_i\,y_i^2 + \epsilon}
-$$
+<p>
+	<img
+		alt="L_mse = (sum_i w_i (y_i - yhat_i)^2) / (sum_i w_i y_i^2 + epsilon)"
+		src="https://render.githubusercontent.com/render/math?math=L_%7Bmse%7D%20%3D%20%5Cfrac%7B%5Csum_i%20w_i%5C,(y_i-%5Chat%7By%7D_i)%5E2%7D%7B%5Csum_i%20w_i%5C,y_i%5E2%20%2B%20%5Cepsilon%7D"
+	/>
+</p>
 
 **(ii) Pearson correlation loss**
 Gọi $\rho$ là hệ số tương quan Pearson giữa $\hat{y}$ và $y$ trong batch:
@@ -124,9 +127,12 @@ L_{pearson} = 1 - \rho
 $$
 
 **(iii) Loss tổng**
-$$
-L = \alpha\,L_{mse} + (1-\alpha)\,L_{pearson}
-$$
+<p>
+	<img
+		alt="L = alpha * L_mse + (1-alpha) * L_pearson"
+		src="https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Calpha%5C,L_%7Bmse%7D%20%2B%20(1-%5Calpha)%5C,L_%7Bpearson%7D"
+	/>
+</p>
 với `alpha = 0.6` và `eps = 1e-8`.
 
 Ngoài ra có một biến thể `Loss2` dùng trọng số chuẩn hoá $w/\sum w$ và tính Pearson theo trọng số.
@@ -141,7 +147,7 @@ Thiết lập trong `main.ipynb`:
 
 ---
 
-## 7. Suy luận & tạo submission
+## 7. Tạo submission
 Do test không có đủ lịch sử cho mỗi `code`, notebook nối:
 
 1) `last_days`: lấy `max_seq_len-1` dòng cuối theo mỗi `code` từ train.
@@ -154,7 +160,7 @@ Do test không có đủ lịch sử cho mỗi `code`, notebook nối:
 
 ## 8. Cấu trúc thư mục
 - `Data preprocessing.ipynb`: EDA + cleaning + chọn stable features bằng LightGBM importance theo phân đoạn thời gian.
-- `main.ipynb`: pipeline chính (preprocess → AE deep features → Transformer training → inference), kèm baseline LightGBM.
+- `main.ipynb`: pipeline chính (preprocess → AE deep features → Transformer training → predicting), kèm baseline LightGBM.
 - `README.md`: báo cáo tóm tắt dự án.
 
 ---
